@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { FaLessThan } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import axios from "axios";
+import {Link} from 'react-router-dom'
 // import './App.css'; 
 import Navbar from "./ExperienceNav.js"
 
@@ -410,7 +411,7 @@ function App() {
         <div className="mr-10 ml-6">
         <div className="flex items-center justify-start px-2 py-2 overflow-x-auto border-2 border-gray-800 rounded-md w-40 ml-5 mb-5 mt-5">
                 <FaLessThan className="text-orange-500 mr-2" />
-                <button><link to=''></link><span className="text font-semibold text-orange-500">Previous Page</span></button>
+              <Link to='/'><button><span className="text font-semibold text-orange-500">Previous Page</span></button></Link>  
         </div>
         </div>
       <div>

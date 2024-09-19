@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaPen, FaRegWindowClose,FaLessThan} from "react-icons/fa";
 import Navbar from "./CurrentNav";
+import {Link} from "react-router-dom"
 import axios from 'axios';
 // import Navbar from "./CurrentNav"
 
@@ -253,7 +254,7 @@ const ExperienceCard = () => {
     <div><Navbar/> </div>
     <div className="flex items-center justify-start px-2 py-2 overflow-x-auto border-2 border-gray-800 rounded-md w-40 ml-5 mb-5 mt-5">
                 <FaLessThan className="text-orange-500 mr-2" />
-                <button><link to=''></link><span className="text font-semibold text-orange-500">Previous Page</span></button>
+                <Link to='/'>  <button><span className="text font-semibold text-orange-500">Previous Page</span></button></Link>
         </div>
     <div className="mr-48 ml-48 border border-black rounded-t-md">
       <div className="bg-orange-500  text-white p-2 rounded-t-md">

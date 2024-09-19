@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react';
 import { FaPen, FaTrash, FaLessThan, FaRegWindowClose } from 'react-icons/fa';
 import axios from 'axios';
 import Navbar from './TravelNavbar';
+import {Link} from 'react-router-dom';
 
 const TravelDetails = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -251,7 +252,7 @@ const TravelDetails = () => {
       <div><Navbar/></div>
       <div className="flex items-center justify-start px-2 py-2 overflow-x-auto border-2 border-gray-800 rounded-md w-40 ml-5 mb-5 mt-5">
                 <FaLessThan className="text-orange-500 mr-2" />
-                <button><link to=''></link><span className="text font-semibold text-orange-500">Previous Page</span></button>
+              <Link to='/'><button><span className="text font-semibold text-orange-500">Previous Page</span></button></Link>  
         </div>
         <div className=" mr-48 ml-48 border border-black rounded-t-md">
             

@@ -4,8 +4,7 @@ import { FaLessThan } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import { TiPencil } from "react-icons/ti";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import {Link} from "react-router-dom"
-import Navbar from "./FamilyNav"
+import {Link} from 'react-router-dom';
 
 const FamilyDetails = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -24,7 +23,7 @@ const FamilyDetails = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://192.168.0.102:8080/employeeservice/familyDetails/HRMS1"
+          "http://192.168.1.16:8080/employeeservice/familyDetails/HRMS1"
         );
         const data = response.data[0];
         setTableData([data]); 
@@ -200,14 +199,13 @@ const FamilyDetails = () => {
 
   return (
     <div>
-      <Navbar/>
       <div className="flex items-center justify-start px-2 py-2 overflow-x-auto border-2 border-gray-800 rounded-md w-40 ml-5 mb-5 mt-5">
         <FaLessThan className="text-orange-500 mr-2" />
-        <Link to="/">
+        <Link to='/'>
         <button>
           <span className="text font-semibold text-orange-500">Previous Page</span>
-        </button>
-        </Link>
+        </button></Link>
+        
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

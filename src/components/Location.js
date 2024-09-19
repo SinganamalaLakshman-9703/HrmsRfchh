@@ -5,6 +5,7 @@ import React from "react";
 import { FaLessThan } from "react-icons/fa";
 import axios from "axios";
 import Navbar from "./LocationNavbar"
+import {Link} from "react-router-dom"
 
 function Location() {
   const [formData, setFormData] = useState({
@@ -328,12 +329,14 @@ function Location() {
       <div className="col-span-11 sm-text overflow-x-auto">
         <div className="flex items-center justify-start px-1 py-1  border-2 border-gray-800 rounded-md w-[150px] mb-3 mt-5 ml-5  ">
           <FaLessThan className="text-orange-400 mr-2" />
+          <Link to='/'>
           <button>
             <span className="text font-semibold text-orange-400">
               Previous Page
             </span>
-          </button>
-          <link />
+          </button></Link>
+         
+          
         </div>
       </div>
       <form onSubmit={(e) => e.preventDefault()} className="p-4 border-black">

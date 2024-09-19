@@ -5,7 +5,7 @@ import { FaLessThan } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import axios from "axios";
 import Navbar from "../components/EducationNav";
-
+import {Link} from "react-router-dom"
 function Laxman() {
   const initialData = {
     Education: "",
@@ -356,9 +356,12 @@ function Laxman() {
       <div className="mr-10 ml-6">
         <div className="flex flex-row text-left justify-start px-3 py-2  border-2 border-orange-500 rounded-md w-[160px] mb-5 mt-5">
           <FaLessThan className="text-black mr-1 mt-1" />
+          <Link to='/'>
           <button>
             <span className="text font-semibold text-black">Previous Page</span>
           </button>
+          </Link>
+         
         </div>
       </div>
       <div>

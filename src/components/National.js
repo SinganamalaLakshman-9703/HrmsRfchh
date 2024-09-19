@@ -3,6 +3,7 @@ import { FaPen, FaTrash, FaLessThan, FaRegWindowClose } from 'react-icons/fa';
 import axios from 'axios';
 // import Navbar from './Header';
 import Header from './NationalNavbar';
+import {Link} from "react-router-dom"
 
 const NationalIDDetails = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -335,7 +336,9 @@ const handleEnter = (e)=>{
     <div><Header/></div>
     <div className="flex items-center justify-start px-2 py-2 overflow-x-auto border-2 border-gray-800 rounded-md w-40 ml-4 mb-5 mt-5">
                 <FaLessThan className="text-orange-500 mr-2" />
+                <Link to='/'>
                 <button><link to=''></link><span className="text font-semibold text-orange-500">Previous Page</span></button>
+                </Link>
         </div>
     <div className=" mr-48 ml-48 border border-black rounded-t-md">
         
