@@ -1,24 +1,24 @@
 import { TiPencil } from "react-icons/ti";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import React, { useEffect, useState } from "react";
+import navbar form '.components/EducationNav.js
 import { FaLessThan } from "react-icons/fa";
 import { MdCancelPresentation } from "react-icons/md";
 import axios from "axios";
-import Navbar from "../components/EducationNav";
-import {Link} from "react-router-dom"
+
 function Laxman() {
   const initialData = {
-    Education: "",
+    education: "",
     institutionName: "",
     universityName: "",
     degree: "",
     majors: "",
-    YearOfPassing: "",
+    yearOfPass: "",
     certificationDate: "",
-    Percentage: "",
+    percentage: "",
     state: "",
     country: "",
-    Attachments: "",
+    //attachments: "",
   };
 
   const [formData, setFormData] = useState({ ...initialData });
@@ -33,7 +33,7 @@ function Laxman() {
     majors: "Majors",
   });
 
-  const EducationOptions = ["SSC", "Inter", "Diploma","Graduation", "Post Graduation"];
+  const educationOptions = ["SSC", "Inter", "Diploma","Graduation", "Post Graduation"];
 
 
   const formatPostDate = (date) => {
@@ -49,21 +49,23 @@ function Laxman() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.0.119:8080/employeeservice/education/HRMS1`)
+        const response = await axios.get(`http://192.168.0.119:8080/employeeservice/education/HRMS1`);
         const data = response.data
         
         console.log(data);
         setFormData({
-          Education:data.education,
-          institutionName : data.institutionName,
-          universityName:data.universityName,
-          degree:data.degree,
-          majors:data.majors,
-          YearOfPassing:data.yearOfPass,
-          certificationDate:data.certificationDate,
-          Percentage:data.percentage,
-          state:data.state,
-          country:data.country,
+
+          education: data.education,
+          institutionName: data.institutionName,
+          universityName: data.universityName,
+          degree: data.degree,
+          majors: data.majors,
+          yearOfPass: data.yearOfPass,
+          certificationDate: data.certificationDate,
+          percentage: data.percentage,
+          state: data.state,
+          country: data.country,
+        
         })
 
       } catch (error) {
@@ -77,8 +79,8 @@ function Laxman() {
   
 
   useEffect(() => {
-    if (formData.Education) {
-      switch (formData.Education) {
+    if (formData.education) {
+      switch (formData.education) {
         case "SSC":
           setEducateLabel({
             institutionName: "School Name",
@@ -128,28 +130,28 @@ function Laxman() {
           });
       }
     }
-  }, [formData.Education]);
+  }, [formData.education]);
 
   const validateForm = () => {
     let newErrors = {};
     const currentYe = new Date().getFullYear();
     const previousYear = currentYe - 100;
 
-    if(formData.Education === ''){
-      newErrors.Education = 'Select One'
+    if(formData.education === ''){
+      newErrors.education = 'Select One'
     }
 
-    if (!formData.institutionName.match(/^[A-Za-z\s]{4,40}$/)) {
-      newErrors.institutionName = `${EducateLabel.institutionName} must be 4-40 characters and contain only letters.`;
+    if (!formData. institutionName.match(/^[A-Za-z\s]{4,40}$/)) {
+      newErrors. institutionName = `${EducateLabel.institutionName} must be 4-40 characters and contain only letters.`;
     }
 
     if (!formData.universityName.match(/^[A-Za-z\s]{4,40}$/)) {
       newErrors.universityName = `${EducateLabel.universityName} must be 4-40 characters and contain only letters.`;
     }
 
-    if (!formData.degree.match(/^[A-Za-z\s]{4,40}$/)) {
+    if (!formData.degree.match(/^[A-Za-z\s]{3,40}$/)) {
       newErrors.degree =
-        "degree must be 4-40 characters and contain only letters.";
+        "degree must be 3-40 characters and contain only letters.";
     }
 
     if (!formData.majors.match(/^[A-Za-z\s]{3,40}$/)) {
@@ -157,12 +159,12 @@ function Laxman() {
         "majors must be 3-40 characters and contain only letters.";
     }
 
-    if (!formData.YearOfPassing) {
-      newErrors.YearOfPassing = 'Year of passing is required';
-    } else if (isNaN(formData.YearOfPassing)) {
-      newErrors.YearOfPassing = 'Year of passing must be a valid number';
-    } else if (formData.YearOfPassing < previousYear || formData.YearOfPassing > currentYe) {
-      newErrors.YearOfPassing = `Year of passing must be between ${previousYear} and ${currentYe}`;
+    if (!formData.yearOfPass) {
+      newErrors.yearOfPass = 'Year of passing is required';
+    } else if (isNaN(formData.yearOfPass)) {
+      newErrors.yearOfPass = 'Year of passing must be a valid number';
+    } else if (formData.yearOfPass < previousYear || formData.yearOfPass > currentYe) {
+      newErrors.yearOfPass = `Year of passing must be between ${previousYear} and ${currentYe}`;
     }
     
    
@@ -171,12 +173,12 @@ function Laxman() {
     }
 
     if (
-      !formData.Percentage.match(/^\d{1,3}(\.\d{0,1})?$/) ||
-      parseFloat(formData.Percentage) < 0 ||
-      parseFloat(formData.Percentage) > 100
+      !formData.percentage.match(/^\d{1,3}(\.\d{0,1})?$/) ||
+      parseFloat(formData.percentage) < 0 ||
+      parseFloat(formData.percentage) > 100
     ) {
-      newErrors.Percentage =
-        "Percentage/Grade must be a number between 0 and 100";
+      newErrors.percentage =
+        "percentage/Grade must be a number between 0 and 100";
     }
 
     if (!formData.state.match(/^[A-Za-z\s]{4,40}$/)) {
@@ -220,31 +222,41 @@ function Laxman() {
     e.preventDefault();
   
     if (validateForm()) {
+      const formatPostDate = (dateString) => {
+        const [day, month, year] = dateString.split('/');
+        return `${year}-${month}-${day}`;  // Converts from "dd/MM/yyyy" to "yyyy-MM-dd"
+      };
+      
       try {
-        // Ensure updatedFormData is constructed correctly
         const updatedFormData = {
           ...formData,
           certificationDate: formatPostDate(formData.certificationDate),
         };
+        console.log("Updated Form Data: ", updatedFormData);
   
         if (editIndex !== null) {
-          // PATCH request to update existing data using updatedFormData
-          await axios.patch(`http://192.168.0.119:8080/employeeservice/Education/updateEducationDetails/${formData.id}`, updatedFormData);
-          
-          // Update the table with the new data
-          const updatedTableData = tableData.map((row, index) => index === editIndex ? updatedFormData : row);
+          console.log("Edit Index: ", editIndex);
+          const patchResponse = await axios.patch(
+            `http://192.168.0.119:8080/employeeservice/education/updateEducationDetails?employeeId=HRMS1`,
+            updatedFormData
+          );
+          console.log("Patch response: ", patchResponse);
+  
+          const updatedTableData = tableData.map((row, index) => 
+            index === editIndex ? updatedFormData : row
+          );
+          console.log("Updated Table Data: ", updatedTableData);
           setTableData(updatedTableData);
   
         } else {
-          console.log(updatedFormData);
-          // POST request to add new data using updatedFormData
-          const response = await axios.post(`http://192.168.0.119:8080/employeeservice/education/createEducationDetails?employeeId=HRMS1`, updatedFormData);
+          const response = await axios.post(
+            `http://192.168.0.119:8080/employeeservice/education/createEducationDetails?employeeId=HRMS1`,
+            updatedFormData
+          );
           const data = response.data;
-          
-          // Update the table with the newly created data
+  
           setTableData([...tableData, data]);
   
-          // Update the form with the newly created data using the correct casing
           setFormData({
             education: data.education,
             institutionName: data.institutionName,
@@ -259,26 +271,19 @@ function Laxman() {
           });
         }
   
-        // Close the popup after form submission
         handleClosePopup();
   
       } catch (error) {
-        console.error("Error submitting data:", error);
-        // Handle error (e.g., display error message)
+        console.error("Error submitting data:", error.response ? error.response.data : error.message);
       }
     }
   };
-
-  
   
 
+  const handleCertification = (e)=>{
+    e.preventDefault()
 
-
-
-  // const handleCertification = (e)=>{
-  //   e.preventDefault()
-
-  // }
+  }
   
  
 
@@ -292,7 +297,7 @@ function Laxman() {
    // Handle deleting a record (DELETE)
    const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://192.168.0.119:8080/employeeservice/Education/deleteEducationDetails/${id}`);
+      await axios.delete(`http://192.168.0.119:8080/employeeservice/education/deleteeducationDetails/${id}`);
       setTableData(tableData.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error deleting data:", error);
@@ -322,7 +327,7 @@ function Laxman() {
     
 
     
-    if (name === "Percentage") {
+    if (name === "percentage") {
       // Allow only numbers with one decimal point
       if (/^\d*\.?\d{0,1}$/.test(value)) {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -333,7 +338,7 @@ function Laxman() {
       )
     ) {
       // Allow only alphabetic characters and spaces
-      if (/^[a-zA-Z].[\s.]$/.test(value) || value === "") {
+      if (/^[a-zA-Z].*[\s\.]*$/.test(value) || value === "") {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
       }
     }
@@ -344,24 +349,21 @@ function Laxman() {
 
     // Allow only up to 4 digits for year input
     if (/^\d{0,4}$/.test(inputYear)) {
-      setFormData({ ...formData, YearOfPassing: inputYear });
+      setFormData({ ...formData, yearOfPass: inputYear });
     }
 
     // Clear the error while typing
-    setErrors({ ...errors, YearOfPassing: '' });
+    setErrors({ ...errors, yearOfPass: '' });
   };
   return (
     <div>
-    <Navbar/>
+    </navbar>
       <div className="mr-10 ml-6">
         <div className="flex flex-row text-left justify-start px-3 py-2  border-2 border-orange-500 rounded-md w-[160px] mb-5 mt-5">
           <FaLessThan className="text-black mr-1 mt-1" />
-          <Link to='/'>
           <button>
             <span className="text font-semibold text-black">Previous Page</span>
           </button>
-          </Link>
-         
         </div>
       </div>
       <div>
@@ -394,16 +396,16 @@ function Laxman() {
                   Education
                 </th>
                 <th className="py-2 px-1 border-b-black border-2 border-solid border-black text-center">
-                  {EducateLabel.institutionName}
+                 Institution Name
                 </th>
                 <th className="py-2 px-2 border-b-black border-2 border-solid border-black text-center">
-                  {EducateLabel.universityName}
+                 University Name
                 </th>
                 <th className="py-2 px-2 border-b-black border-2 border-solid border-black text-center">
-                  {EducateLabel.degree}
+                  Degree
                 </th>
                 <th className="py-2 px-2 border-b-black border-2 border-solid border-black text-center">
-                  {EducateLabel.majors}
+                  Majors
                 </th>
                 <th className="py-2 px-2 border-b-black border-2 border-solid border-black text-center">
                   Year of Passing
@@ -418,7 +420,7 @@ function Laxman() {
                   State
                 </th>
                 <th className="py-2 px-2 border-b-black border-2 border-solid border-black text-center">
-                  country
+                  Country
                 </th>
                 <th className="py-2 px-2 border-b-black border-2 border-solid border-black text-center">
                   Attachments
@@ -430,7 +432,7 @@ function Laxman() {
               {tableData.map((row, index) => (
                 <tr key={index}>
                   <td className="py-5 px-4 border-b border-gray-900 border-r text-center  max-w-[100px]  overflow-x-auto">
-                    {row.Education}
+                    {row.education}
                   </td>
                   <td className="py-5 px-4 border-b border-gray-900 border-r text-center  max-w-[100px]  overflow-x-auto">
                     {row.institutionName}
@@ -445,13 +447,13 @@ function Laxman() {
                     {row.majors}
                   </td>
                   <td className="py-5 px-4 border-b border-gray-900 border-r text-center  max-w-[100px]  overflow-x-auto">
-                    {row.YearOfPassing}
+                    {row.yearOfPass}
                   </td>
                   <td className="py-5 px-4 border-b border-gray-900 border-r text-center  max-w-[100px]  overflow-x-auto">
                     {row.certificationDate}
                   </td>
                   <td className="py-5 px-4 border-b border-gray-900 border-r text-center  max-w-[100px]  overflow-x-auto">
-                    {row.Percentage}
+                    {row.percentage}
                   </td>
                   <td className="py-5 px-4 border-b border-gray-900 border-r text-center  max-w-[100px]  overflow-x-auto">
                     {row.state}
@@ -471,7 +473,7 @@ function Laxman() {
                       {index !== 0 && (
                         <RiDeleteBin6Line
                           className="inline-block cursor-pointer "
-                          onClick={() => handleDelete()}
+                          onClick={() => handleDelete(data.id)}
                         />
                       )}
                     </div>
@@ -488,8 +490,8 @@ function Laxman() {
               <div className="flex items-center justify-between mb-4 bg-orange-500 m-2 rounded-lg">
                 <h2 className="p-1 m-1 text-xl">
                   {editIndex !== null
-                    ? "Edit Education Details"
-                    : "Add Education Details"}
+                    ? "Edit education Details"
+                    : "Add education Details"}
                 </h2>
                 <MdCancelPresentation
                   className="text-xl mr-2 cursor-pointer"
@@ -504,26 +506,26 @@ function Laxman() {
                 <div className="grid grid-cols-4 gap-4 p-4">
                   <div>
                     <label
-                      htmlFor="Education"
+                      htmlFor="education"
                       className="mb-1 text-gray-700 font-medium"
                     >
-                      Education
+                      education
                     </label>
                     <select
-                      name="Education"
-                      value={formData.Education}
+                      name="education"
+                      value={formData.education}
                       onChange={handleChange}
                       className="mt-1 block w-full border border-gray-300  p-2 rounded"
                     >
-                      <option value="">Select Education</option>
-                      {EducationOptions.map((option) => (
+                      <option value="">Select education</option>
+                      {educationOptions.map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>
                       ))}
                     </select>
-                    {errors.Education && (
-                      <p className="text-red-500 text-xs">{errors.Education}</p>
+                    {errors.education && (
+                      <p className="text-red-500 text-xs">{errors.education}</p>
                     )}
                   </div>
                   <div>
@@ -602,22 +604,22 @@ function Laxman() {
                   </div>
                   <div>
                     <label
-                      htmlFor="YearOfPassing"
+                      htmlFor="yearOfPass"
                       className="mb-1 text-gray-700 font-medium"
                     >
                       Year of Passing
                     </label>
                     <input
           type="text"
-          name="YearOfPassing"
-          value={formData.YearOfPassing}
+          name="yearOfPass"
+          value={formData.yearOfPass}
           onChange={handleYearChange}
          
           className="mt-1 block w-full border border-gray-300 p-2 rounded"
           placeholder={`${minYear} - ${currentYear}`}
         />
-        {errors.YearOfPassing && (
-          <p className="text-red-500 text-sm mt-1">{errors.YearOfPassing}</p>
+        {errors.yearOfPass && (
+          <p className="text-red-500 text-sm mt-1">{errors.yearOfPass}</p>
         )}
                 
                   </div>
@@ -646,22 +648,22 @@ function Laxman() {
                   </div>
                   <div>
                     <label
-                      htmlFor="Percentage"
+                      htmlFor="percentage"
                       className="mb-1 text-gray-700 font-medium"
                     >
-                      Percentage/Grade
+                      percentage/Grade
                     </label>
                     <input
                       type="text"
-                      name="Percentage"
+                      name="percentage"
                       maxLength={4}
-                      value={formData.Percentage}
+                      value={formData.percentage}
                       onChange={handleInputChange}
                       className="mt-1 block w-full border border-gray-300  p-2 rounded"
                     />
-                    {errors.Percentage && (
+                    {errors.percentage && (
                       <p className="text-red-500 text-xs">
-                        {errors.Percentage}
+                        {errors.percentage}
                       </p>
                     )}
                   </div>
@@ -757,3 +759,4 @@ function Laxman() {
 }
 
 export default Laxman;
+
