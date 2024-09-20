@@ -107,8 +107,8 @@ const EditFamilyDetails = ({ member, onSave, onCancel }) => {
         validationErrors[field] = "Only characters are allowed.";
       } else if (formValues[field].length < 2) {
         validationErrors[field] = `${field} must be at least 2 characters.`;
-      } else if (formValues[field].length > 30) {
-        validationErrors[field] = `${field} must be at most 30 characters.`;
+      } else if (formValues[field].length > 25) {
+        validationErrors[field] = `${field} must be at most 25characters.`;
       }
     });
 

@@ -4,8 +4,8 @@ import { BsPencilSquare } from "react-icons/bs";
 import React from "react";
 import { FaLessThan } from "react-icons/fa";
 import axios from "axios";
-import Navbar from "./LocationNavbar"
-import {Link} from "react-router-dom"
+import {Link} from 'react-router-dom'
+import Navbar from './LocationNavbar'
 
 function Location() {
   const [formData, setFormData] = useState({
@@ -334,9 +334,10 @@ function Location() {
             <span className="text font-semibold text-orange-400">
               Previous Page
             </span>
-          </button></Link>
+          </button>
+          </Link>
          
-          
+          <link />
         </div>
       </div>
       <form onSubmit={(e) => e.preventDefault()} className="p-4 border-black">

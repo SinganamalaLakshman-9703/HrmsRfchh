@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import EditFamilyDetails from "./EditPersonalDetails";
 import Navbar from "./PersonalNavbar";
- 
 const PersonalInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewEmployee, setIsNewEmployee] = useState(true);
